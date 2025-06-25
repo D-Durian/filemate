@@ -1,0 +1,17 @@
+{
+  "name": "DMS Development Container",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "backend", // frondend 
+  "workspaceFolder": "/app",
+  "appPort": [3000, 5000],
+  "extensions": [
+    "ms-azuretools.vscode-docker",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint"
+  ],
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "postCreateCommand": "npm install",
+  "remoteUser": "vscode"
+}
