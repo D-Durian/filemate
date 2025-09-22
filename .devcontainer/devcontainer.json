@@ -1,17 +1,14 @@
 {
-  "name": "DMS Development Container",
+  "name": "filemate - devcontainer",
   "dockerComposeFile": ["../docker-compose.yml"],
-  "service": "backend", // frondend 
-  "workspaceFolder": "/app",
-  "appPort": [3000, 5000],
+  "service": "frontend",
+  "workspaceFolder": "/workspaces/filemate",
+  "forwardPorts": [3000],
   "extensions": [
     "ms-azuretools.vscode-docker",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint"
   ],
-  "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
-  },
-  "postCreateCommand": "npm install",
-  "remoteUser": "vscode"
+  "postCreateCommand": "bash -lc 'chown -R node:node /workspaces/filemate && su node -c \"cd frontend && npm install && npx cypress verify\"'",
+  "remoteUser": "root"
 }

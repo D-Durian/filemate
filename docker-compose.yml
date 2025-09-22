@@ -1,27 +1,18 @@
+version: "3.8"
 
 services:
   frontend:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: ./docker
+      dockerfile: dockerfile-frontend
+    init: true
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=1
+      - WATCHPACK_POLLING=true
     ports:
       - "3000:3000"
-    volumes:
-      - ./frontend:/app
-    environment:
-      - NODE_ENV=development
-
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - "5000:5000"
-    volumes:
-      - ./backend:/app
-    environment:
-      - NODE_ENV=development
-      - PORT=5000
+    # Code wird vom Devcontainer gemountet – kein zusätzliches volumes hier.
 
 networks:
   default:
