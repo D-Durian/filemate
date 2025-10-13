@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
+type Document = {
+    id: number;
+    title: string;
+    content?: string;
+};
+
 const DocumentList: React.FC = () => {
-    const [documents, setDocuments] = useState([]);
+    const [documents, setDocuments] = useState<Document[]>([]);
 
     useEffect(() => {
         const fetchDocuments = async () => {
@@ -24,7 +30,7 @@ const DocumentList: React.FC = () => {
                 {documents.map((document) => (
                     <li key={document.id}>
                         <h2>{document.title}</h2>
-                        <p>{document.description}</p>
+                        {document.content && <p>{document.content}</p>}
                     </li>
                 ))}
             </ul>

@@ -1,12 +1,12 @@
 import express, { Request, Response } from 'express';
 
-const router = express.Router();
+export const documentRouter = express.Router();
 
 // Mock database for documents
 let documents: any[] = [];
 
 // Create a new document
-router.post('/documents', (req: Request, res: Response) => {
+documentRouter.post('/', (req: Request, res: Response) => {
     const { title, content } = req.body;
     const newDocument = { id: documents.length + 1, title, content };
     documents.push(newDocument);
@@ -14,12 +14,12 @@ router.post('/documents', (req: Request, res: Response) => {
 });
 
 // Retrieve all documents
-router.get('/documents', (req: Request, res: Response) => {
+documentRouter.get('/', (req: Request, res: Response) => {
     res.json(documents);
 });
 
 // Retrieve a document by ID
-router.get('/documents/:id', (req: Request, res: Response) => {
+documentRouter.get('/:id', (req: Request, res: Response) => {
     const document = documents.find(doc => doc.id === parseInt(req.params.id));
     if (document) {
         res.json(document);
@@ -29,7 +29,7 @@ router.get('/documents/:id', (req: Request, res: Response) => {
 });
 
 // Update a document by ID
-router.put('/documents/:id', (req: Request, res: Response) => {
+documentRouter.put('/:id', (req: Request, res: Response) => {
     const documentIndex = documents.findIndex(doc => doc.id === parseInt(req.params.id));
     if (documentIndex !== -1) {
         const { title, content } = req.body;
@@ -41,7 +41,7 @@ router.put('/documents/:id', (req: Request, res: Response) => {
 });
 
 // Delete a document by ID
-router.delete('/documents/:id', (req: Request, res: Response) => {
+documentRouter.delete('/:id', (req: Request, res: Response) => {
     const documentIndex = documents.findIndex(doc => doc.id === parseInt(req.params.id));
     if (documentIndex !== -1) {
         documents.splice(documentIndex, 1);
@@ -50,5 +50,3 @@ router.delete('/documents/:id', (req: Request, res: Response) => {
         res.status(404).send('Document not found');
     }
 });
-
-export default router;

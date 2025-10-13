@@ -1,0 +1,23 @@
+{
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/.parcel-cache/**": true,
+    "**/.cache/**": true,
+    "**/.vite/**": true,
+    "**/cypress/screenshots/**": true,
+    "**/cypress/videos/**": true,
+    "**/cypress/downloads/**": true
+  },
+  "search.exclude": {
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/.parcel-cache/**": true,
+    "**/.cache/**": true,
+    "**/.vite/**": true
+  },
+  "git.autoRepositoryDetection": true,
+  "git.scanRepositories": [
+    "${workspaceFolder}"
+  ]
+}

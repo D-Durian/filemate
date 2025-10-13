@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    init: true
+    tty: true
+    command: ["bash", "-lc", "sleep infinity"]
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=1
+      - WATCHPACK_POLLING=true
+    # VS Code mountet das gesamte Repo automatisch
+    volumes:
+      - .:/workspaces/filemate:cached
+
+  # Optional: weitere Dev-Services (z.B. Datenbank, Mock-API)
+
+networks:
+  default:
+    driver: bridge
