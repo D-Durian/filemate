@@ -72,3 +72,44 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+## TODO
+
+- [ ] Persist registered locations (save to disk so they survive backend restarts)
+- [ ] Add dry-run mode to the sync engine (report-only)
+- [ ] Improve sync reports and error handling
+- [ ] Add unit tests for the sync service
+- [ ] Prepare packaging (Electron) for a Windows .exe build
+
+## Aktueller Stand (kurz)
+
+- Frontend: React + Vite app with a minimal `SyncManager` UI (add location, run sync, show report). File: `frontend/src/components/SyncManager.tsx`.
+- Backend: Node + Express with a small SyncService that scans locations, compares files by relative path using mtime+size and copies newer files to other locations. Endpoints:
+   - POST `/api/sync/locations` — registriert einen Speicherort (body: { path })
+   - GET `/api/sync/locations` — listet registrierte Standorte
+   - POST `/api/sync` — startet einen Sync-Job
+   - GET `/api/sync/last` — liefert den letzten Sync-Report
+- Testdaten: Beispiel-Ordner wurden ins Workspace-Verzeichnis `test-data/` kopiert (sichtbar im Explorer) und konnten erfolgreich gesynct werden.
+
+## Wie du lokal testen kannst (im DevContainer)
+
+1. Starte Backend (im Container):
+
+```bash
+cd backend
+npm install
+npx tsc -b
+node dist/index.js
+```
+
+2. Starte das Frontend (im Container):
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+3. Testdaten sind vorhanden unter `test-data/location1` und `test-data/location2`. Im Frontend `SyncManager` kannst du diese Pfade hinzufügen (z. B. `/workspaces/filemate/test-data/location1`) und einen Sync starten.
+
+Wenn du willst, implementiere ich jetzt die Persistenz der Locations oder einen Dry-run Modus — sag mir kurz, welche Priorität du möchtest.
