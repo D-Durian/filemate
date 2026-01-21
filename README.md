@@ -1,32 +1,23 @@
-# Document Management System (DMS)
+# FileMate – Intelligent Document Management System
 
-This project is a Document Management System (DMS) that allows users to manage documents efficiently. It includes features for document storage, tagging, and Optical Character Recognition (OCR).
+ DMS with OCR capabilities, built with a focus on DevOps best practices and containerization.
 
-## Features
-
-- **Ablagestruktur**: Organize documents in a structured manner.
-- **Tagging**: Add relevant keywords or categories to documents for easy retrieval.
-- **OCR**: Perform Optical Character Recognition on documents to extract text.
-
-
+## Architecture
+- **Backend:** Python (FastAPI/Flask) with Tesseract OCR integration.
+- **Frontend:** Vue.js 3 with Vite.
+- [cite_start]**Proxy/Ingress:** Traefik with automated TLS. [cite: 17, 31]
+- **Storage:** PostgreSQL + MinIO (S3 compatible) or local volumes.
 
 
 
-1. Starte Backend (im Container):
+## Development Workflow
+This project is designed to be developed entirely within a **Dev Container**.
+1. Open folder in VS Code.
+2. Click "Reopen in Container".
+3. All dependencies (Python, Node, Docker, OCR-Libs) are pre-installed.
 
-```bash
-cd backend
-npm install
-npx tsc -b
-node dist/index.js
-```
-
-2. Starte das Frontend (im Container):
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-3. Testdaten sind vorhanden unter `test-data/location1` und `test-data/location2`. Im Frontend `SyncManager` kannst du diese Pfade hinzufügen (z. B. `/workspaces/filemate/test-data/location1`) und einen Sync starten.
+## CI/CD
+Automated pipelines via GitHub Actions:
+- Linting (Ruff/ESLint)
+- Security Scans (Trivy)
+- Docker Build & Push to Registry
