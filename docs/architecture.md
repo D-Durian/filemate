@@ -1,3 +1,6 @@
+# Architecture
+
+```mermaid
 graph TD
     subgraph Client_Side [User Interface]
         UI[Vue.js Frontend]
@@ -5,7 +8,6 @@ graph TD
 
     subgraph Server_Side [Docker Environment]
         Proxy[Traefik Reverse Proxy]
-        
         API[Flask Backend API]
         
         subgraph Workers [Background Tasks]
@@ -21,13 +23,12 @@ graph TD
         Cloud[Google Drive API]
     end
 
-    %% Communication Flow
     UI <-->|REST API / JSON| Proxy
     Proxy <--> API
     API <--> DB
     API <--> Scanner
     
-    %% File Operations
     Scanner <--> Local
     Scanner <--> USB
     Scanner <--> Cloud
+```
