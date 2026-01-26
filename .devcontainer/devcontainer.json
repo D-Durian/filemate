@@ -1,18 +1,35 @@
 {
   "name": "filemate - devcontainer",
-  "dockerComposeFile": ["../docker-compose.dev.yml"],
-  "service": "devcontainer",
+  "dockerComposeFile": [
+    "../docker-compose.dev.yml"
+  ],
+  "service": "backend",
   "workspaceFolder": "/workspaces/filemate",
-  "forwardPorts": [3000],
+  "runServices": [
+    "db",
+    "backend",
+    "frontend"
+  ],
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-azuretools.vscode-docker",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "dsznajder.es7-react-js-snippets",
+        "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "dbaeumer.vscode-eslint"
-      ]
+        "ms-azuretools.vscode-docker",
+        "ckotzbauer.mermaid-editor",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-pg"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python3",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      }
     }
   },
-  "postCreateCommand": "bash -lc 'echo ==== MOUNT CHECK ==== && echo /workspaces && ls -al /workspaces || true && echo /workspaces/filemate && ls -al /workspaces/filemate || true && echo /workspaces/filemate/frontend && ls -al /workspaces/filemate/frontend || true && echo ==== NPM SETUP ==== && mkdir -p /home/node/.npm && chown -R node:node /workspaces/filemate /home/node/.npm || true && su node -c \"cd /workspaces/filemate/frontend && npm install && npx cypress verify\" || true'",
+  "postCreateCommand": "bash .devcontainer/postCreate.sh",
   "remoteUser": "root"
-} 
+}

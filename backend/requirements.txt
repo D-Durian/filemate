@@ -1,0 +1,16 @@
+#Web Framework & Server
+fastapi==0.128.0  #Web-Framework
+uvicorn[standard]==0.40.0 #ASGI Server
+
+#Database
+sqlalchemy==2.9.45 #ORM
+psycopg2-binary==2.9.11 #PostgreSQL Driver
+alembic==1.18.1 #DB Migration
+
+#Validation
+pydantic[email]==2.12.5 #Data Validation
+pydantic-settings==2.12.5 #Settings Management
+python-dotenv==1.2.0 #Environment Variables
+
+#System
+python-multipart==0.0.20 #File Upload
