@@ -12,15 +12,10 @@ echo "Workdir: $(pwd)"
 echo "Ensuring file ownership for vscode user..."
 sudo chown -R vscode:vscode /workspaces/filemate
 
-# 3. Backend Setup (Python/FastAPI)
+
 if [ -f "backend/requirements.txt" ]; then
-    echo "==== BACKEND: Installing Python Dependencies ===="
-    if [ -f "/usr/local/bin/pip" ]; then
-        pip install --no-cache-dir -r backend/requirements.txt
-    else
-        echo "WARNING: pip not found in expected path, trying just 'pip'"
-        pip install --no-cache-dir -r backend/requirements.txt
-    fi
+    echo "==== BACKEND: Checking for new Python Dependencies ===="
+    pip install --no-cache-dir -r backend/requirements.txt
 else
     echo "==== BACKEND ERROR: No requirements.txt found! ===="
 fi
