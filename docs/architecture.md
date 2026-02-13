@@ -1,39 +1,38 @@
 # High Level Architecture
 
 ```mermaid
-graph TD
-    subgraph Client_Side [Frontend - React]
-        UI[React.js Web UI]
-        State[State Management / Hooks]
+flowchart TD
+    subgraph Host [Your Windows Machine]
+        Browser[Web Browser]
+        Code[VS Code UI]
     end
 
-    subgraph Server_Side [Docker Infrastructure]
-        Proxy[Traefik Reverse Proxy]
-        
-        API[FastAPI Backend]
-        
-        subgraph Workers [Asynchronous Operations]
-            Scanner[Sync & Scan Engine]
-            RClone[RClone Integration]
+    subgraph Docker [Docker Desktop]
+        subgraph BackendContainer [Backend Container / "Workstation"]
+            VSCodeServer[VS Code Server]
+            Terminal[Terminal / Shell]
+            PyApp[FastAPI App]
+            NodeTools[Node/NPM Tools]
         end
-        
-        DB[(PostgreSQL Database)]
+
+        subgraph FrontendContainer [Frontend Container / "Runner"]
+            ViteServer[Vite Dev Server]
+        end
+
+        subgraph DbContainer [DB Container]
+            Postgres[PostgreSQL]
+        end
     end
 
-    subgraph Storage_Locations [Data Sources]
-        Local[Local Storage /data]
-        USB[External Drive /mnt]
-        Cloud[Cloud Provider via RClone]
-    end
-
-    %% Communication Path
-    UI <-->|REST API / JSON| Proxy
-    Proxy <--> API
-    API <--> DB
-    API <--> Scanner
-    Scanner <--> RClone
+    %% Connections
+    Code <-->|Connects via Devcontainer| VSCodeServer
+    VSCodeServer <-->|Runs in| BackendContainer
+    Browser <-->|Port 8000| PyApp
+    Browser <-->|Port 5173| ViteServer
     
-    %% File Operations
-    RClone <--> Local
-    RClone <--> USB
-    RClone <--> Cloud
+    BackendContainer <-->|Internal Network| DbContainer
+    BackendContainer <-->|Edits Files| FrontendContainer
+    
+    %% Shared Volume
+    BackendContainer -- Mounts --> ProjectFiles[(Project Files)]
+    FrontendContainer -- Mounts --> ProjectFiles
