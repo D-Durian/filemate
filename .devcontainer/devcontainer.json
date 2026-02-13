@@ -10,6 +10,26 @@
     "backend",
     "frontend"
   ],
+  "forwardPorts": [
+    5173, //React
+    8000, //FastAPI
+    5432 //PostgreSQL
+  ],
+  "portsAttributes": {
+    "5173": {
+      "label": "Frontend (React)",
+      "onAutoForward": "openBrowser"
+    },
+    "8000": {
+      "label": "Backend (FastAPI)",
+      "onAutoForward": "ignore"
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/node:1.7.0": {
+      "version": "20"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [
@@ -26,10 +46,11 @@
       "settings": {
         "python.defaultInterpreterPath": "/usr/local/bin/python3",
         "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "typescript.tsdk": "frontend/node_modules/typescript/lib"
       }
     }
   },
-  "postCreateCommand": "bash .devcontainer/postCreate.sh",
-  "remoteUser": "root"
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "remoteUser": "vscode"
 }

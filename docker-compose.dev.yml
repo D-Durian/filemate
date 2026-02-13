@@ -29,9 +29,10 @@ services:
   frontend:
     build:
       context: ./frontend
+    container_name: filemate_frontend
     volumes:
       - ./frontend:/workspaces/filemate/frontend
-      - .:/workspaces/filemate/frontend/node_modules
+      - /workspaces/filemate/frontend/node_modules
     ports:
       - "5173:5173"
 
