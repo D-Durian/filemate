@@ -1,10 +1,9 @@
 FROM python:3.11-slim-bullseye
 
 RUN apt-get update && apt-get install -y \
-    curl \
-    unzip \
-    git \
-    sudo \
+    curl unzip git sudo \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
     && curl https://rclone.org/install.sh | sudo bash \
     && rm -rf /var/lib/apt/lists/*
 

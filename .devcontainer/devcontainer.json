@@ -25,32 +25,21 @@
       "onAutoForward": "ignore"
     }
   },
-  "features": {
-    "ghcr.io/devcontainers/features/node:1.7.0": {
-      "version": "20"
+  "vscode": {
+    "extensions": [
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "ms-azuretools.vscode-docker",
+      "ckotzbauer.mermaid-editor",
+      "mtxr.sqltools",
+      "mtxr.sqltools-driver-pg"
+    ],
+    "settings": {
+      "python.defaultInterpreterPath": "/usr/local/bin/python3",
+      "editor.formatOnSave": true
     }
-  },
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "ms-python.python",
-        "ms-python.vscode-pylance",
-        "dsznajder.es7-react-js-snippets",
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
-        "ms-azuretools.vscode-docker",
-        "ckotzbauer.mermaid-editor",
-        "mtxr.sqltools",
-        "mtxr.sqltools-driver-pg"
-      ],
-      "settings": {
-        "python.defaultInterpreterPath": "/usr/local/bin/python3",
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "typescript.tsdk": "frontend/node_modules/typescript/lib"
-      }
-    }
-  },
-  "postCreateCommand": "bash .devcontainer/post-create.sh",
-  "remoteUser": "vscode"
+  }
+},
+"postCreateCommand": "bash .devcontainer/post-create.sh",
+"remoteUser": "vscode"
 }
