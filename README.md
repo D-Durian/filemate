@@ -4,9 +4,8 @@
 
 ## Architecture
 - **Backend:** Python (FastAPI/Flask) with Tesseract OCR integration.
-- **Frontend:** Vue.js 3 with Vite.
-- [cite_start]**Proxy/Ingress:** Traefik with automated TLS. [cite: 17, 31]
-- **Storage:** PostgreSQL + MinIO (S3 compatible) or local volumes.
+- **Frontend:** React 3 with Vite.
+- **Storage:** PostgreSQL 
 
 
 
