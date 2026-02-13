@@ -1,5 +1,4 @@
 FROM python:3.11-slim-bullseye AS base
-
 WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
@@ -8,7 +7,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 
-FROM base AS dev
+FROM python:3.11-bullseye AS dev
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl unzip git sudo wget gnupg \
@@ -18,11 +17,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get update && apt-get install -y nodejs \
     && curl https://rclone.org/install.sh | sudo bash \
     && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 RUN useradd -m vscode && \
     echo vscode ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/vscode && \
     chmod 0440 /etc/sudoers.d/vscode
-WORKDIR /workspaces/filemate/backend
-RUN chown -R vscode:vscode /workspaces/filemate/backend
+WORKDIR /workspaces/filemate
+RUN chown -R vscode:vscode /workspaces/filemate
 USER vscode
 EXPOSE 8000
 CMD ["sleep", "infinity"]
