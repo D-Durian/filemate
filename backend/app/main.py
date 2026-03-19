@@ -3,14 +3,13 @@ import os
 
 app = FastAPI(title="FileMateAPI")
 
-@app.get("/")
-async def root():
-    return {"status": "online", "message": "FileMate Backend is running",
-            "container_workdir": os.getcwd()}
+@app.post("/locations")
+async def add_location(location: Location):
+    fake_db_location.append(loc)
+    return  {"message": "Location added", "data": loc}
+    
 
-@app.get("/health")
-async def health():
-
-    #später DB-Check
-    return {"database": "pending", "storeage": "local"}
+@app.get("/scan/{location_id}")
+async def scan_location(location_id: int):
+    if location_id 
     
