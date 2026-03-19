@@ -20,15 +20,6 @@ else
     echo "==== BACKEND ERROR: No requirements.txt found! ===="
 fi
 
-# 4. Frontend Setup (React/Vite)
-if [ -f "frontend/package.json" ]; then
-    echo "==== FRONTEND: Installing Node Dependencies ===="
-    cd frontend
-    npm install
-    cd ..
-else
-    echo "==== FRONTEND NOTICE: No package.json found in frontend/ ===="
-fi
 
 # 5. RClone Check
 if command -v rclone &> /dev/null; then
