@@ -1,16 +1,26 @@
-# Environments
+
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.antigravity-server/
+
+
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
 .env
-.venv
-env/
+.env.local
 
-# Build outputs
+node_modules/
+frontend/node_modules/
 dist/
-**/dist/
-.parcel-cache/
-.cache/
-*.tsbuildinfo
-**/*.tsbuildinfo
+build/
+.eslintcache
+*.log
 
-# testing
-test-data/
-
+.docker/
